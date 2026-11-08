@@ -30,9 +30,9 @@ Given a small 8x8 image of a handwritten digit, predict which digit (0-9) it sho
 
 ## c. GitHub repository link
 
-https://github.com/<your-github-username>/digit-classifier-streamlit
+https://github.com/nitunkp/digit-classifier-streamlit 
 
-Live Streamlit app: https://<your-app-name>.streamlit.app
+Live Streamlit app: https://digit-classifier-nkp.streamlit.app 
 
 ### Repository structure
 
