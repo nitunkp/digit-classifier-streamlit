@@ -1,0 +1,21 @@
+{
+  "Logistic Regression": {
+    "clf__C": 1
+  },
+  "Decision Tree": {
+    "clf__criterion": "gini",
+    "clf__max_depth": 14,
+    "clf__min_samples_leaf": 1
+  },
+  "kNN": {
+    "clf__n_neighbors": 5,
+    "clf__weights": "distance"
+  },
+  "Naive Bayes": {
+    "clf__var_smoothing": 0.1
+  },
+  "Support Vector Machine": {
+    "clf__C": 10,
+    "clf__gamma": 0.001
+  }
+}
