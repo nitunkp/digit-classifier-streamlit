@@ -56,13 +56,6 @@ digit-classifier-streamlit/
 `-- assets/metrics_comparison.png
 ```
 
-### How to run
-
-```
-pip install -r requirements.txt
-python -m model.train_models      # re-creates the split, models, metrics (well under a minute)
-streamlit run app.py              # opens the web app
-```
 
 ## d. Models used
 
