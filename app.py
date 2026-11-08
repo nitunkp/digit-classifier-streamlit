@@ -39,11 +39,6 @@ def load_feature_columns():
     return json.loads((ROOT / "model" / "feature_columns.json").read_text())
 
 
-@st.cache_data
-def load_bundled_test_data():
-    return pd.read_csv(ROOT / "test_data.csv")
-
-
 @st.cache_resource
 def load_models():
     """Return ({name: fitted pipeline}, [names that had to be re-fitted])."""
@@ -110,23 +105,31 @@ with st.sidebar:
     st.header("1 · Test data")
     uploaded = st.file_uploader("Upload test CSV", type=["csv"],
                                 help="64 pixel columns (pixel_0_0 … pixel_7_7) and an optional 'target' column.")
-    st.caption("No file uploaded? The bundled `test_data.csv` (450 held-out images) is used.")
+    st.caption("All metrics stay at 0 until a test CSV is uploaded.")
     st.header("2 · Model")
     chosen = st.selectbox("Choose a classifier", MODEL_NAMES, index=MODEL_NAMES.index("Support Vector Machine"))
     if refitted:
         st.caption("ℹ️ Re-fitted on start-up: " + ", ".join(refitted))
 
-# ----- read data
-if uploaded is not None:
-    try:
-        data = pd.read_csv(uploaded)
-        source_note = f"Uploaded file: **{uploaded.name}**"
-    except Exception as exc:
-        st.error(f"Could not read that file as CSV ({exc}).")
-        st.stop()
-else:
-    data = load_bundled_test_data()
-    source_note = "Bundled sample: **test_data.csv**"
+# ----- nothing uploaded yet: show zeroed metrics and wait for a file
+if uploaded is None:
+    st.subheader(f"{chosen} - waiting for test data")
+    st.info("Upload a test CSV in the sidebar to evaluate the selected model. "
+            "All values below stay at 0 until then.")
+    zero_row1 = st.columns(3)
+    zero_row2 = st.columns(3)
+    for col, key in zip(zero_row1 + zero_row2, METRIC_ORDER):
+        col.metric(key, "0.0000")
+    st.stop()
+
+# ----- read the uploaded data
+try:
+    uploaded.seek(0)  # make sure the file is read from the start on every rerun
+    data = pd.read_csv(uploaded)
+    source_note = f"Uploaded file: **{uploaded.name}**"
+except Exception as exc:
+    st.error(f"Could not read that file as CSV ({exc}).")
+    st.stop()
 
 missing = [c for c in feature_cols if c not in data.columns]
 if missing:
