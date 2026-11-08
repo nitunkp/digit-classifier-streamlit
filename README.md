@@ -90,7 +90,7 @@ Chosen hyper-parameters: Logistic Regression C=1; Decision Tree gini, max_depth=
 
 The app (`app.py`) provides:
 
-1. **Dataset upload (CSV)** - sidebar uploader for a test CSV with the 64 pixel columns and an optional `target` column. If nothing is uploaded, the bundled `test_data.csv` is used so the app is never empty. Files with missing columns or non-numeric pixels produce a clear message instead of an error.
+1. **Dataset upload (CSV)** - sidebar uploader for a test CSV with the 64 pixel columns and an optional `target` column. Until a file is uploaded, all six metrics show 0.0000; they update only after a test CSV is uploaded.. Files with missing columns or non-numeric pixels produce a clear message instead of an error.
 2. **Model selection dropdown** - choose any of the five classifiers.
 3. **Evaluation metrics** - Accuracy, AUC, Precision, Recall, F1 and MCC for the selected model, shown as metric tiles.
 4. **Confusion matrix and classification report** - heat-map plus per-digit precision/recall/F1 table.
