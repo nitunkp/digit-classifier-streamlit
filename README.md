@@ -112,4 +112,4 @@ Extra tabs: a gallery of the digits the selected model got wrong (drawn as 8x8 i
 
 ## Deployment (Streamlit Community Cloud)
 
-Sign in at https://streamlit.io/cloud with GitHub, choose **New app**, select this repository, branch `main`, main file `app.py`, and click **Deploy**.
+Deployed at streamlit.io using this repo from GitHub. 
